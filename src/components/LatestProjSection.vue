@@ -95,8 +95,22 @@ const categories = ['all', 'game development', 'front end development', 'web app
 const selectedCategory = ref('all');
 
 const Projects = ref([
-    {
+ {
         id: 1,
+        category: 'front end development',
+        images: [
+            new URL('@/assets/upfily_1.png', import.meta.url).href,
+            new URL('@/assets/upfily_2.png', import.meta.url).href,
+            new URL('@/assets/upfily_3.png', import.meta.url).href
+        ],
+        currentImageIndex: 0,
+        title: 'Uplify',
+        description: 'This personal development tracking website was built using Vue, TypeScript, CSS and Bootstrap. It enables users to set goals, track their progress over time, and stay motivated with visual insights. Upfily provides a clean, interactive interface for managing self-improvement habits and encourages consistency through progress monitoring tools.',
+        technologies: ['Vue.js', 'Typescript', 'Bootstrap'],
+        gitURL: 'https://github.com/ibrahimustun/Upfily',
+    },
+    {
+        id: 2,
         category: 'game development',
         images: [
             new URL('@/assets/ibu.png', import.meta.url).href,
@@ -111,7 +125,7 @@ const Projects = ref([
         playStoreURL: '#',
     },
     {
-        id: 2,
+        id: 3,
         category: 'web applications',
         images: [
             new URL('@/assets/skyup.png', import.meta.url).href,
@@ -120,11 +134,11 @@ const Projects = ref([
         ],
         currentImageIndex: 0,
         title: 'SkyUp',
-        description: 'The warehouse tracking application for İtimat Elevator Factory streamlines inventory management and tracks stock movements in real time. Built with Java, MySQL, Vue.js, and Bootstrap, it offers a user-friendly interface and a robust, reliable backend.',
+        description: 'The warehouse tracking application for İtimat Elevator Factory streamlines inventory management and tracks stock movements in real time. Built with Java, MySQL, Vue.js and Bootstrap, it offers a user-friendly interface and a robust, reliable backend.',
         technologies: ['Java', 'Vue.js', 'MySQL','Bootstrap'],
     },
     {
-        id: 3,
+        id: 4,
         category: 'game development',
         images: [
             new URL('@/assets/frogfeeder.png', import.meta.url).href,
@@ -139,7 +153,7 @@ const Projects = ref([
         playStoreURL: '#',
     },
     {
-        id: 4,
+        id: 5,
         category: 'game development',
         images: [
             new URL('@/assets/2064.png', import.meta.url).href,
@@ -153,7 +167,7 @@ const Projects = ref([
         gitURL: 'https://github.com/ibrahimustun/2048-Game',
     },
     {
-        id: 5,
+        id: 6,
         category: 'game development',
         images: [
             new URL('@/assets/misterkarpuz.png', import.meta.url).href,
@@ -168,14 +182,14 @@ const Projects = ref([
         playStoreURL: '#',
     },
     {
-        id: 6,
+        id: 7,
         category: 'front end development',
         images: [
             new URL('@/assets/e_ustun.png', import.meta.url).href
         ],
         currentImageIndex: 0,
         title: 'USTUN',
-        description: 'This e-commerce website was built using HTML, CSS, and PHP. It allows users to explore handmade products, view details, and reach out for purchases.',
+        description: 'This e-commerce website was built using HTML, CSS and PHP. It allows users to explore handmade products, view details, and reach out for purchases.',
         technologies: ['HTML', 'Css', 'Php'],
         gitURL: 'https://github.com/ibrahimustun/USTUN---E-Commerce-Web-Site',
     },
