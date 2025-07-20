@@ -76,7 +76,7 @@ const Skills =ref([
     {
         id:6,
         name:'Java',
-        width:'50%'
+        width:'60%'
     },
     {
         id:7,
@@ -86,6 +86,12 @@ const Skills =ref([
 ]);
 
 const Experinces =ref([
+    {
+        id:0,
+        role:'Full-Stack Developer',
+        company:'NeonRun',
+        date:'June 2025 - Present'
+    },
     {
         id:1,
         role:'Web Designer',
