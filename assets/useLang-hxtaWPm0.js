@@ -1,0 +1,1 @@
+import{r as u}from"./index-CwHQI7bQ.js";const a=["en","tr","ru"],t=localStorage.getItem("language"),e=u(a.includes(t)?t:"en");function g(){function o(n){e.value=a.includes(n)?n:"en",localStorage.setItem("language",e.value),window.dispatchEvent(new CustomEvent("language-changed",{detail:e.value}))}return{lang:e,setLang:o}}export{g as u};
