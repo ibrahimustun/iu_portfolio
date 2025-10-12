@@ -112,7 +112,7 @@ const texts = {
             {
                 id: 2,
                 title: 'Ibu',
-                description: 'It is a 2D platformer game that I am currently developing and continuing to work on using C# and Unity. Featuring challenging levels, unique mechanics, and a vibrant art style, this project reflects my ongoing growth in game design and Unity development.',
+                description: 'It is a fun 2D platformer game designed to help elementary school children improve their basic math operation skills. Developed using C# and Unity, this project combines learning and entertainment through engaging gameplay and colorful visuals.',
             },
             {
                 id: 3,
@@ -158,7 +158,7 @@ const texts = {
             {
                 id: 2,
                 title: 'Ibu',
-                description: 'C# ve Unity ile geliştirdiğim ve üzerinde çalışmaya devam ettiğim bir 2D platform oyunudur. Zorlu seviyeler, benzersiz mekanikler ve canlı bir sanat tarzı ile oyun tasarımı ve Unity geliştirme alanındaki ilerlememi yansıtmaktadır.',
+                description: 'İlkokul çağındaki çocukların temel matematik işlemlerini geliştirmelerine yardımcı olmak için tasarlanmış eğlenceli bir 2D platform oyunu. C# ve Unity kullanılarak geliştirilen bu proje, ilgi çekici oynanışı ve renkli görselleriyle öğrenmeyi eğlenceyle birleştiriyor.',
             },
             {
                 id: 3,
@@ -204,7 +204,7 @@ const texts = {
             {
                 id: 2,
                 title: 'Ibu',
-                description: 'Это 2D платформер, который я разрабатываю на C# и Unity. Сложные уровни, уникальные механики и яркий стиль отражают мой рост в области геймдизайна и Unity.',
+                description: 'Это увлекательная 2D платформенная игра, созданная для того, чтобы помочь детям начальной школы улучшить навыки базовых математических операций. Разработанный с использованием C# и Unity, этот проект сочетает обучение и развлечение через увлекательный игровой процесс и яркую графику.',
             },
             {
                 id: 3,

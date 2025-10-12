@@ -29,7 +29,7 @@
                                 </svg>
                                 <div class="download-loader text-white hidden"></div>
                             </div>
-                            <a href="/iu_portfolio/İbrahim Üstün - Software Developer Resume.pdf" download="İbrahim Üstün - Software Developer Resume.pdf" class="pl-2 text-primary">
+                            <a href="/iu_portfolio/İbrahim Üstün - Software Developer Resume.pdf" download="İbrahim Üstün - Software Developer Resume.pdf" class="pl-2 text-primary">
                                 {{ currentTexts.download }}
                             </a>
                         </div>
