@@ -1,6 +1,6 @@
 <template>
 <section class="text-white mt-20" id="contact">
-    <h2 class="text-4xl font-bold text-white text-center mb-12 px-4">Let's Connect</h2>
+    <h2 class="text-4xl font-bold text-white text-center mb-12 px-4">{{ currentTexts.letsConnect }}</h2>
     <div class="relative px-4 mt-8" data-aos="zoom-in-up">
         <div class="flex flex-wrap justify-center gap-8 md:gap-12">
             <!-- Email -->
@@ -8,7 +8,7 @@
                 <div class="p-5 mb-3 bg-[#111a3e] rounded-full border-2 border-[#111a3e] transition-all group-hover:border-primary">
                     <img src="https://img.icons8.com/metro/50/ffffff/new-post.png" alt="Email" class="w-10 h-10">
                 </div>
-                <span class="text-base opacity-80 group-hover:opacity-100">Email</span>
+                <span class="text-base opacity-80 group-hover:opacity-100">{{ currentTexts.email }}</span>
             </a>
 
             <!-- LinkedIn -->
@@ -48,7 +48,7 @@
                 <div class="p-5 mb-3 bg-[#111a3e] rounded-full border-2 border-[#111a3e] transition-all group-hover:border-primary">
                     <img src="https://img.icons8.com/ios-filled/50/ffffff/google-play.png" alt="Google Play" class="w-10 h-10">
                 </div>
-                <span class="text-base opacity-80 group-hover:opacity-100">Play Store</span>
+                <span class="text-base opacity-80 group-hover:opacity-100">{{ currentTexts.playStore }}</span>
             </a>
             <!-- Telegram -->
             <a href="https://t.me/ibrahimustun97" target="_blank" class="flex flex-col items-center group">
@@ -62,6 +62,29 @@
 </section>
 </template>
 
-<script>
-export default {}
+<script setup>
+import { useLang } from '@/composables/useLang'
+import { computed } from 'vue'
+
+const { lang } = useLang()
+
+const texts = {
+  en: {
+    letsConnect: "Let's Connect",
+    email: "Email",
+    playStore: "Play Store",
+  },
+  tr: {
+    letsConnect: "İletişim",
+    email: "E-posta",
+    playStore: "Play Store",
+  },
+  ru: {
+    letsConnect: "Свяжитесь со мной",
+    email: "Почта",
+    playStore: "Play Store",
+  }
+}
+
+const currentTexts = computed(() => texts[lang.value] || texts.en)
 </script>

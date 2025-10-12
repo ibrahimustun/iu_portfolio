@@ -42,4 +42,3 @@ import loadingSpinner from './components/loadingSpinner.vue';
   scrollbar-color: #111827 #f1f1f1;
 }
 </style>
-

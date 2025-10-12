@@ -9,16 +9,13 @@
             <div class="lg:py-6">
                 <div class="text-center lg:text-left">
                     <h1 class="pt-4 text-white font-bold text-4xl md:text-5xl lg:text-6xl">
-                        Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-500">
-                            İbrahim
+                        {{ currentTexts.hi }} <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-500">
+                            {{ displayName }}
                         </span>
                     </h1>
                 </div>
-                <p class="text-gray-300 pt-8 text-center lg:text-left mx-auto max-w-xl">
-                    A passionate creator with a love for bringing ideas to life through digital experiences.
-                    I enjoy blending creativity and problem-solving to design and build engaging projects.
-                    Whether it's developing games or creating user-friendly websites, I strive to deliver work that is both functional and visually appealing.
-                    I'm always excited about new opportunities to learn, grow, and collaborate.
+                <p class="text-gray-300 pt-8 text-center lg:text-left mx-auto max-w-xl" style="white-space:pre-line;">
+                    {{ currentTexts.description }}
                 </p>
                 <div class="flex items-center gap-3 pt-9 flex-col sm:flex-row sm:w-max sm:mx-auto lg:mx-0">
                     <button class=" border border-primary px-6 md:px-7 py-3 rounded-full relative group w-full sm:w-max flex justify-center">
@@ -32,7 +29,9 @@
                                 </svg>
                                 <div class="download-loader text-white hidden"></div>
                             </div>
-                            <a href="/iu_portfolio/İbrahim Üstün - Software Developer Resume.pdf" download="İbrahim Üstün - Software Developer Resume.pdf" class="pl-2 text-primary">Download resume</a>
+                            <a href="/iu_portfolio/İbrahim Üstün - Software Developer Resume.pdf" download="İbrahim Üstün - Software Developer Resume.pdf" class="pl-2 text-primary">
+                                {{ currentTexts.download }}
+                            </a>
                         </div>
                     </button>
                 </div>
@@ -49,9 +48,36 @@
     </div>
 </section>
 </template>
+<script setup>
+import { useLang } from '@/composables/useLang'
+import { computed } from 'vue'
 
-<script>
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-AOS.init();
+const { lang } = useLang()
+
+const texts = {
+  en: {
+    hi: "Hi, I'm",
+    description: `I love bringing ideas to life by creating digital experiences. My process involves a blend of creativity and problem-solving to design and build engaging, user-friendly projects, from websites to games. I am always excited to learn new skills, take on challenges, and collaborate with others.`,
+    download: "Download resume"
+  },
+  tr: {
+    hi: "Selam, ben",
+    description: `Dijital deneyimler aracılığıyla fikirleri hayata geçirmeye tutkulu, yaratıcı biriyim. Yaratıcılığımı problem çözme becerimle birleştirerek, hem işlevsel hem de görsel açıdan etkileyici projeler tasarlamayı ve geliştirmeyi seviyorum. Oyun geliştirmekten kullanıcı dostu arayüzler oluşturmaya kadar her türlü projede, sürekli öğrenmeye ve verimli iş birliklerine açık bir şekilde çalışıyorum.`,
+    download: "CV'yi indir"
+  },
+  ru: {
+    hi: "Привет, я",
+    description: `Я увлеченный создатель цифровых продуктов, для которого важно не просто воплощать идеи в жизнь, но и наполнять их смыслом. Мой подход строится на гармонии креативности и решения задач: будь то игра или веб-сайт, я стремлюсь к тому, чтобы результат был эстетичным, удобным и технически безупречным. Я верю в непрерывное развитие и всегда открыт к новым вызовам, возможностям учиться и плодотворному сотрудничеству.`,
+    download: "Скачать резюме"
+  }
+}
+
+const names = {
+  en: "Ibrahim",
+  tr: "İbrahim",
+  ru: "Ибрагим"
+}
+
+const currentTexts = computed(() => texts[lang.value] || texts.en)
+const displayName = computed(() => names[lang.value] || names.en)
 </script>
