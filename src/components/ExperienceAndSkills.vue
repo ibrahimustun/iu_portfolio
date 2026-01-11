@@ -1,5 +1,5 @@
 <template>
-<section class="text-white mt-18" id="skills">
+<section class="text-white mt-18" id="skills" ref="skillsRef">
     <div class="absolute right-0 top-[110rem] h-full w-full justify-end">
         <span class="flex opacity-20">
             <span class="w-16 h-32 rounded-l-full flex bg-primary blur-2xl"></span>
@@ -11,15 +11,15 @@
             <h2 class="text-4xl font-bold text-white text-left mb-4">
                 {{ skillsTitle }}
             </h2>
-            <div class="mt-8" v-for="skill in Skills" :key="skill.id">
+            <div class="mt-8 p-4 rounded-xl bg-[#111a3e]/40 backdrop-blur-sm border border-white/5 hover:border-primary/30 transition-colors" v-for="skill in Skills" :key="skill.id">
                 <div class="flex items-end justify-between" data-aos="fade-right">
                     <h4 class="font-semibold uppercase text-white">
                         {{ skill.name }}
                     </h4>
-                    <h3 class="text-2xl font-bold text-white">{{ skill.width }}</h3>
+                    <h3 class="text-2xl font-bold text-primary">{{ skill.width }}</h3>
                 </div>
-                <div class="mt-2 h-1 w-full bg-[#131d30] rounded-full">
-                    <div class="h-1 rounded-full bg-primary" :style="`width :${skill.width}`"></div>
+                <div class="mt-2 h-2 w-full bg-[#131d30] rounded-full overflow-hidden">
+                    <div class="h-full rounded-full bg-gradient-to-r from-primary to-secondary transition-all duration-1000 ease-out" :style="`width :${showSkills ? skill.width : '0%'}`"></div>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
                 {{ experiencesTitle }}
             </h2>
             <div class="space-y-8 py-8" data-aos="fade-left">
-                <div v-for="element in Experiences" :key="element.id" class="flex items-center rounded-xl p-4 bg-[#111a3e] shadow-lg border border-[#1f1641]">
+                <div v-for="element in Experiences" :key="element.id" class="flex items-center rounded-2xl p-6 bg-[#111a3e]/60 backdrop-blur-sm shadow-xl border border-white/5 hover:-translate-y-1 transition-transform duration-300">
                     <div class="w-1/4">
                         <img src="https://img.icons8.com/ios-filled/100/ffffff/lawyer.png" alt="lawyer">
                     </div>
@@ -47,7 +47,7 @@
 </section>
 </template>
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useLang } from '@/composables/useLang'
 
 const { lang } = useLang()
@@ -120,4 +120,22 @@ const experiencesTitle = computed(() => (texts[lang.value] || texts.en).experien
 
 const Skills = computed(() => skills[lang.value] || skills.en);
 const Experiences = computed(() => experiences[lang.value] || experiences.en);
+
+const showSkills = ref(false);
+const skillsRef = ref(null);
+
+onMounted(() => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                showSkills.value = true;
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    if (skillsRef.value) {
+        observer.observe(skillsRef.value);
+    }
+});
 </script>

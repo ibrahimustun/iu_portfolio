@@ -8,7 +8,7 @@
                 <h2 class="text-4xl font-bold text-white text-left mb-8">{{ currentTexts.educationTitle }}</h2>
                 <div class="space-y-8 py-8">
                     <div v-for="element in currentEducation" :key="element.id"
-                    class="flex items-center md:w-[80%] w-full rounded-xl bg-[#111a3e] shadow-lg border border-[#1f1641]"
+                    class="flex items-center md:w-[90%] w-full rounded-2xl bg-[#111a3e]/60 backdrop-blur-sm shadow-xl border border-white/5 hover:-translate-y-1 transition-transform duration-300 p-6"
                     >
                         <div class="w-1/4">
                             <img src="https://img.icons8.com/ios-glyphs/60/ffffff/graduation-cap--v1.png" alt="graduation-cap--v1">

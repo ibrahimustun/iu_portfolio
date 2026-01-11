@@ -6,58 +6,58 @@
     <div class="flex flex-wrap justify-center gap-8 md:gap-12">
       <!-- Email (start noktası için ref) -->
       <a ref="startRef" href="mailto:ustunibrahim32@gmail.com" target="_blank" class="flex flex-col items-center group">
-        <div class="p-5 mb-3 bg-[#111a3e] rounded-full border-2 border-[#111a3e] transition-all group-hover:border-primary">
+        <div class="p-5 mb-3 bg-[#111a3e]/50 backdrop-blur-sm rounded-full border-2 border-white/5 transition-all duration-300 group-hover:border-primary group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(12,192,223,0.5)]">
           <img src="https://img.icons8.com/metro/50/ffffff/new-post.png" alt="Email" class="w-10 h-10">
         </div>
-        <span class="text-base opacity-80 group-hover:opacity-100">{{ currentTexts.email }}</span>
+        <span class="text-base opacity-80 group-hover:opacity-100 group-hover:text-primary transition-colors">{{ currentTexts.email }}</span>
       </a>
 
       <!-- LinkedIn -->
       <a href="https://linkedin.com/in/ibrahimustun" target="_blank" class="flex flex-col items-center group">
-        <div class="p-5 mb-3 bg-[#111a3e] rounded-full border-2 border-[#111a3e] transition-all group-hover:border-primary">
+        <div class="p-5 mb-3 bg-[#111a3e]/50 backdrop-blur-sm rounded-full border-2 border-white/5 transition-all duration-300 group-hover:border-primary group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(12,192,223,0.5)]">
           <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="LinkedIn" class="w-10 h-10">
         </div>
-        <span class="text-base opacity-80 group-hover:opacity-100">LinkedIn</span>
+        <span class="text-base opacity-80 group-hover:opacity-100 group-hover:text-primary transition-colors">LinkedIn</span>
       </a>
 
       <!-- GitHub -->
       <a href="https://github.com/ibrahimustun" target="_blank" class="flex flex-col items-center group">
-        <div class="p-5 mb-3 bg-[#111a3e] rounded-full border-2 border-[#111a3e] transition-all group-hover:border-primary">
+        <div class="p-5 mb-3 bg-[#111a3e]/50 backdrop-blur-sm rounded-full border-2 border-white/5 transition-all duration-300 group-hover:border-primary group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(12,192,223,0.5)]">
           <img src="https://img.icons8.com/ios-glyphs/50/ffffff/github.png" alt="GitHub" class="w-10 h-10">
         </div>
-        <span class="text-base opacity-80 group-hover:opacity-100">GitHub</span>
+        <span class="text-base opacity-80 group-hover:opacity-100 group-hover:text-primary transition-colors">GitHub</span>
       </a>
 
       <!-- Instagram -->
       <a href="https://instagram.com/ibrahimustun97" target="_blank" class="flex flex-col items-center group">
-        <div class="p-5 mb-3 bg-[#111a3e] rounded-full border-2 border-[#111a3e] transition-all group-hover:border-primary">
+        <div class="p-5 mb-3 bg-[#111a3e]/50 backdrop-blur-sm rounded-full border-2 border-white/5 transition-all duration-300 group-hover:border-primary group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(12,192,223,0.5)]">
           <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram" class="w-10 h-10">
         </div>
-        <span class="text-base opacity-80 group-hover:opacity-100">Instagram</span>
+        <span class="text-base opacity-80 group-hover:opacity-100 group-hover:text-primary transition-colors">Instagram</span>
       </a>
 
-      <!-- YouTube -->
+      <!-- YouTube 
       <a href="#" target="_blank" class="flex flex-col items-center group">
-        <div class="p-5 mb-3 bg-[#111a3e] rounded-full border-2 border-[#111a3e] transition-all group-hover:border-primary">
+        <div class="p-5 mb-3 bg-[#111a3e]/50 backdrop-blur-sm rounded-full border-2 border-white/5 transition-all duration-300 group-hover:border-primary group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(12,192,223,0.5)]">
           <img src="https://img.icons8.com/ios-filled/50/ffffff/youtube-play.png" alt="YouTube" class="w-10 h-10">
         </div>
-        <span class="text-base opacity-80 group-hover:opacity-100">YouTube</span>
-      </a>
+        <span class="text-base opacity-80 group-hover:opacity-100 group-hover:text-primary transition-colors">YouTube</span>
+      </a>-->
 
-      <!-- Google Play -->
+      <!-- Google Play 
       <a href="#" target="_blank" class="flex flex-col items-center group">
-        <div class="p-5 mb-3 bg-[#111a3e] rounded-full border-2 border-[#111a3e] transition-all group-hover:border-primary">
+        <div class="p-5 mb-3 bg-[#111a3e]/50 backdrop-blur-sm rounded-full border-2 border-white/5 transition-all duration-300 group-hover:border-primary group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(12,192,223,0.5)]">
           <img src="https://img.icons8.com/ios-filled/50/ffffff/google-play.png" alt="Google Play" class="w-10 h-10">
         </div>
-        <span class="text-base opacity-80 group-hover:opacity-100">{{ currentTexts.playStore }}</span>
-      </a>
+        <span class="text-base opacity-80 group-hover:opacity-100 group-hover:text-primary transition-colors">{{ currentTexts.playStore }}</span>
+      </a>-->
 
       <!-- Telegram (end noktası için ref) -->
       <a ref="endRef" href="https://t.me/ibrahimustun97" target="_blank" class="flex flex-col items-center group">
-        <div class="p-5 mb-3 bg-[#111a3e] rounded-full border-2 border-[#111a3e] transition-all group-hover:border-primary">
+        <div class="p-5 mb-3 bg-[#111a3e]/50 backdrop-blur-sm rounded-full border-2 border-white/5 transition-all duration-300 group-hover:border-primary group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(12,192,223,0.5)]">
           <img src="https://img.icons8.com/ios-filled/50/ffffff/telegram-app.png" alt="Telegram" class="w-10 h-10">
         </div>
-        <span class="text-base opacity-80 group-hover:opacity-100">Telegram</span>
+        <span class="text-base opacity-80 group-hover:opacity-100 group-hover:text-primary transition-colors">Telegram</span>
       </a>
     </div>
   </div>

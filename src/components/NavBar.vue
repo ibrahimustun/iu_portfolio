@@ -1,5 +1,5 @@
 <template>
-    <header class="flex justify-between items-center p-6 bg-opacity-50 relative z-20">
+    <header class="fixed top-0 left-0 right-0 flex justify-between items-center p-6 bg-[#111827] bg-opacity-50 backdrop-blur-lg z-50 border-b border-[#33353F] border-opacity-30">
         <!-- Logo -->
         <div class="text-white text-3xl font-bold">
             <img src="@/assets/iu.png" alt="Logo" class="h-16 w-auto" />
@@ -67,8 +67,8 @@
         </div>
         <!-- Mobile Nav -->
         <nav
-            :class="['fixed inset-0 z-20 flex flex-col items-center justify-center bg-[#111827] md:relative md:bg-transparent md:hidden md:justify-between md:flex-row',
-                isMenuOpen ? 'block':'hidden'
+            :class="['fixed inset-0 z-20 flex flex-col items-center justify-center bg-[#111827] bg-opacity-95 backdrop-blur-xl md:relative md:bg-transparent md:hidden md:justify-between md:flex-row transition-all duration-300 ease-in-out',
+                isMenuOpen ? 'opacity-100 pointer-events-auto visible' : 'opacity-0 pointer-events-none invisible md:opacity-100 md:pointer-events-auto md:visible'
             ]"
         >
             <ul class="flex flex-col items-center space-y-5 md:flex-row md:space-x-5 md:space-y-0">

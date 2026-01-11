@@ -1,8 +1,8 @@
 <template>
 <section class="relative w-full" data-aos="zoom-in-up">
     <div class="absolute top-0 inset-x-0 h-64 flex items-start">
-        <div class="h-24 w-2/3 bg-gradient-to-br from-[#570cac] blur-2xl invisible opacity-40"></div>
-        <div class="h-20 w-3/5 bg-gradient-to-r from-[#670ccf] opqcity-40 blur-2xl"></div>
+        <div class="h-32 w-2/3 bg-gradient-to-t from-[#ffffff00] via-[#570cac] to-[#0cc0df] blur-3xl opacity-20"></div>
+        <div class="h-20 w-3/5 bg-gradient-to-r from-[#670ccf] opacity-40 blur-3xl"></div>
     </div>
     <div class="w-full px-5 sm:px-8 md:px-12 lg:px-8 max-w-screen-lg lg:max-w-screen-xl mx-auto relative">
         <div class="grid lg:grid-cols-2 gap-10 xl:gap-14 relative pt-24 lg:max-w-none max-w-2xl md:max-w-3xl mx-auto">
@@ -14,7 +14,7 @@
                         </span>
                     </h1>
                 </div>
-                <p class="text-gray-300 pt-8 text-center lg:text-left mx-auto max-w-xl" style="white-space:pre-line;">
+                <p class="text-gray-300 pt-8 text-center lg:text-left mx-auto max-w-xl min-h-[160px] md:min-h-[150px]" style="white-space:pre-line;">
                     {{ currentTexts.description }}
                 </p>
                 <div class="flex items-center gap-3 pt-9 flex-col sm:flex-row sm:w-max sm:mx-auto lg:mx-0">
@@ -39,7 +39,7 @@
             <div class="lg:h-full md:flex">
                 <div class="flex w-full h-96 min-h-[24rem] lg:min-h-[none] lg:w-full lg:h-full items-center relative">
                     <div class="absolute z-0 top-1/2 -translate-y-1/2 w-5/6 right-0 h-[calc(80%+20px)] bg-gradient-to-tr opacity-25 from-[#570cac] to-primary blur-2xl"></div>
-                    <div class="absolute h-full z-10 p-2 -translate-y-1/2 top-1/2 lg:right-3 md:right-40 sm:right-16 rounded-full shadow-lg border border-primary">
+                    <div class="absolute h-full z-10 p-2 -translate-y-1/2 top-1/2 lg:right-3 md:right-40 sm:right-16 rounded-full shadow-lg border border-primary animate-float">
                         <img src="@/assets/ustun.png" alt="Hero pic" width="500" height="auto" loading="lazy" class="w-full h-full rounded-full object-cover">
                     </div>
                 </div>
@@ -48,6 +48,16 @@
     </div>
 </section>
 </template>
+<style scoped>
+@keyframes float {
+    0% { transform: translateY(-50%) translateY(0px); }
+    50% { transform: translateY(-50%) translateY(-20px); }
+    100% { transform: translateY(-50%) translateY(0px); }
+}
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+</style>
 <script setup>
 import { useLang } from '@/composables/useLang'
 import { computed } from 'vue'

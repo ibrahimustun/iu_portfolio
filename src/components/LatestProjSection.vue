@@ -1,27 +1,28 @@
 <template>
-    <section class="text-white mt-20" id="projects">
+    <section class="text-white mt-20 relative z-30" id="projects">
         <div class="px-4 xl:pl-16">
             <div class="mb-4 md:flex md:justify-between xl:pr-16">
                 <h2 class="text-4xl font-bold text-white">{{ currentTexts.latestProjects }}</h2>
-                <div class="flex space-x-4 mb-4 mt-5 md:mt-0">
-                    <label v-for="category in categories" :key="category.value" class="hover:text-primary cursor-pointer">
-                        <input 
-                            type="radio" 
-                            v-model="selectedCategory" 
-                            :value="category.value" 
-                            class="hidden"
-                        >
-                        <span :class="{ 'text-primary': selectedCategory === category.value }">{{ category.label }}</span>
-                    </label>
+                <div class="flex flex-wrap gap-2 mb-4 mt-5 md:mt-0">
+                    <button v-for="category in categories" :key="category.value" 
+                        @click="selectedCategory = category.value"
+                        class="px-4 py-2 rounded-full border transition-all duration-300"
+                        :class="selectedCategory === category.value ? 'bg-primary border-primary text-white' : 'border-white/10 hover:bg-white/10 text-gray-400'"
+                    >
+                        {{ category.label }}
+                    </button>
                 </div>
             </div>
             <ul class="px-4 sm:py-16 xl:pr-16 grid grid-cols-1 gap-6 pt-10 sm:grid-cols-2 md:gap-10 md:pt-12 lg:grid-cols-3"
                 data-aos="fade-right">
-                <div v-for="project in filteredProjects" :key="project.id">
+                <div v-for="(project, index) in filteredProjects" :key="project.id"
+                     :class="{ 'lg:col-start-2': index === filteredProjects.length - 1 && filteredProjects.length % 3 === 1 }"
+                     class="flex flex-col h-full"
+                >
                     <!-- Carousel Wrapper -->
                     <div class="w-full relative group" style="aspect-ratio: 50 / 25;">
                         <!-- Carousel Images -->
-                        <div class="h-full w-full relative overflow-hidden">
+                        <div class="h-full w-full relative overflow-hidden rounded-t-2xl">
                             <div
                                 v-for="(image, index) in project.images"
                                 :key="index"
@@ -32,7 +33,7 @@
                                 <img 
                                     :src="image" 
                                     alt="Project screenshot" 
-                                    class="w-full h-full object-cover object-center"
+                                    class="w-full h-full object-cover object-center rounded-t-2xl"
                                 >
                                 <!-- GitHub and Play Store Icon Overlay -->
                                 <a v-if="index === project.currentImageIndex && project.gitURL"
@@ -56,7 +57,7 @@
                         </div>
                         <!-- Left Arrow -->
                         <button
-                            class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 cursor-pointer"
+                            class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 cursor-pointer z-10"
                             @click="prevImage(project)">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
@@ -64,7 +65,7 @@
                         </button>
                         <!-- Right Arrow -->
                         <button
-                            class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 cursor-pointer"
+                            class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 cursor-pointer z-10"
                             @click="nextImage(project)">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5 15.75 12l-7.5 7.5" />
@@ -72,14 +73,17 @@
                         </button>
                     </div>
                     <!-- Project Details -->
-                    <div class="text-white rounded-b-xl mt-3 bg-[#111a3e] shadow-lg border border-[#1f1641] py-6 px-4">
-                        <h3 class="text-lg font-semibold uppercase lg:text-xl">{{ getProjectTitle(project) }}</h3>
-                        <p class="text-[#ADB7BE]">{{ getProjectDescription(project) }}</p>
-                        <div class="flex flex-wrap p-2.5">
-                            <div v-for="technology in project.technologies" :key="technology" class="text-center ml-1 mt-1 rounded-3xl bg-[#111827]"
-                                style="box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); border: 1px solid #111827;backdrop-filter: blur(9px);-webkit-backdrop-filter: blur(9px);">
-                                <p class="px-1 py-2">{{ technology }}</p>
-                            </div>
+                    <div class="text-white rounded-b-2xl mt-0 bg-[#111a3e]/80 backdrop-blur-md shadow-xl border-x border-b border-white/5 py-6 px-4 flex-1 flex flex-col justify-between h-[250px] relative transition-height overflow-hidden">
+                        <div>
+                            <h3 class="text-lg font-semibold uppercase lg:text-xl truncate" :title="getProjectTitle(project)">{{ getProjectTitle(project) }}</h3>
+                            <p class="text-[#ADB7BE] mt-2 mb-4 line-clamp-4 text-sm">{{ getProjectDescription(project) }}</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span v-for="technology in project.technologies" :key="technology" 
+                                class="px-3 py-1 text-xs rounded-full bg-primary/10 text-primary border border-primary/20"
+                            >
+                                {{ technology }}
+                            </span>
                         </div>
                     </div>
                 </div>
