@@ -1,93 +1,149 @@
 <template>
-<section class="relative w-full" data-aos="zoom-in-up">
-    <div class="absolute top-0 inset-x-0 h-64 flex items-start">
-        <div class="h-32 w-2/3 bg-gradient-to-t from-[#ffffff00] via-[#570cac] to-[#0cc0df] blur-3xl opacity-20"></div>
-        <div class="h-20 w-3/5 bg-gradient-to-r from-[#670ccf] opacity-40 blur-3xl"></div>
-    </div>
-    <div class="w-full px-5 sm:px-8 md:px-12 lg:px-8 max-w-screen-lg lg:max-w-screen-xl mx-auto relative">
-        <div class="grid lg:grid-cols-2 gap-10 xl:gap-14 relative pt-24 lg:max-w-none max-w-2xl md:max-w-3xl mx-auto">
-            <div class="lg:py-6">
-                <div class="text-center lg:text-left">
-                    <h1 class="pt-4 text-white font-bold text-4xl md:text-5xl lg:text-6xl">
-                        {{ currentTexts.hi }} <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-500">
-                            {{ displayName }}
-                        </span>
-                    </h1>
-                </div>
-                <p class="text-gray-300 pt-8 text-center lg:text-left mx-auto max-w-xl min-h-[160px] md:min-h-[150px]" style="white-space:pre-line;">
-                    {{ currentTexts.description }}
-                </p>
-                <div class="flex items-center gap-3 pt-9 flex-col sm:flex-row sm:w-max sm:mx-auto lg:mx-0">
-                    <button class=" border border-primary px-6 md:px-7 py-3 rounded-full relative group w-full sm:w-max flex justify-center">
-                        <div class="hover:scale-105 transition-all ease-in-out flex justify-center items-center relative">
-                            <div class="svg-container">
-                                <svg class="download-icon" width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path class="download-arrow" d="M13 9L9 13M9 13L5 9M9 13V1" stroke="#0cc0df" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M1 17V18C1 18.7956 1.31607 19.5587 1.87868 20.1213C2.44129
-                                    20.6839 3.20435 21 4 21H14C14.7956 21 15.5587 20.6839 16.1213
-                                    20.1213C16.6839 19.5587 17 18.7956 17 18V17" stroke="#0cc0df" stroke-width="2" stroke-linecap="round" />
-                                </svg>
-                                <div class="download-loader text-white hidden"></div>
-                            </div>
-                            <a href="/iu_portfolio/İbrahim Üstün - Software Developer Resume.pdf" download="İbrahim Üstün - Software Developer Resume.pdf" class="pl-2 text-primary">
-                                {{ currentTexts.download }}
-                            </a>
-                        </div>
-                    </button>
-                </div>
-            </div>
-            <div class="lg:h-full md:flex">
-                <div class="flex w-full h-96 min-h-[24rem] lg:min-h-[none] lg:w-full lg:h-full items-center relative">
-                    <div class="absolute z-0 top-1/2 -translate-y-1/2 w-5/6 right-0 h-[calc(80%+20px)] bg-gradient-to-tr opacity-25 from-[#570cac] to-primary blur-2xl"></div>
-                    <div class="absolute h-full z-10 p-2 -translate-y-1/2 top-1/2 lg:right-3 md:right-40 sm:right-16 rounded-full shadow-lg border border-primary animate-float">
-                        <img src="@/assets/ustun.png" alt="Hero pic" width="500" height="auto" loading="lazy" class="w-full h-full rounded-full object-cover">
-                    </div>
-                </div>
-            </div>
+  <section id="home" class="relative overflow-hidden pt-28 sm:pt-32 lg:pt-36">
+    <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 pb-20 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:pb-28">
+      <div v-reveal class="relative z-10">
+        <p class="section-kicker">{{ currentTexts.kicker }}</p>
+
+        <h1 class="motion-title max-w-4xl text-balance text-5xl font-bold leading-[0.96] tracking-normal text-white sm:text-6xl lg:text-7xl">
+          {{ currentTexts.headline }}
+          <span class="block text-cyan-200">{{ currentTexts.headlineAccent }}</span>
+        </h1>
+
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
+          {{ currentTexts.description }}
+        </p>
+
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a
+            href="#projects"
+            class="inline-flex min-h-12 items-center justify-center rounded-full bg-cyan-300 px-6 py-3 text-sm font-bold text-slate-950 transition hover:bg-emerald-300"
+            @click="scrollToSection('#projects')"
+          >
+            {{ currentTexts.primaryCta }}
+          </a>
+          <a
+            href="#skills"
+            class="inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 bg-white/[0.04] px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10"
+            @click="scrollToSection('#skills')"
+          >
+            {{ currentTexts.secondaryCta }}
+          </a>
         </div>
+
+        <dl class="mt-10 grid max-w-2xl gap-3 sm:grid-cols-3">
+          <div v-for="(stat, index) in currentTexts.stats" :key="stat.label" v-reveal="120 + index * 80" class="motion-card rounded-lg border border-white/10 bg-white/[0.04] p-4">
+            <dt class="text-2xl font-bold text-white">{{ stat.value }}</dt>
+            <dd class="mt-1 text-xs font-medium uppercase tracking-wide text-slate-400">{{ stat.label }}</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div v-reveal="160" class="relative mx-auto w-full max-w-[24rem] sm:max-w-[28rem] lg:max-w-[30rem]">
+        <div class="motion-card relative overflow-hidden rounded-lg border border-white/10 bg-white/[0.05] shadow-2xl shadow-slate-950/50">
+          <div class="grid grid-cols-[0.95fr_1.05fr] border-b border-white/10">
+            <div class="bg-slate-900">
+              <img src="@/assets/ustun.png" alt="Ibrahim Ustun portrait" class="h-full min-h-72 w-full object-cover object-top" />
+            </div>
+            <div class="flex flex-col justify-between p-5">
+              <div>
+                <p class="text-sm font-semibold text-cyan-200">{{ currentTexts.cardEyebrow }}</p>
+                <p class="mt-2 text-2xl font-bold leading-tight text-white">{{ currentTexts.cardTitle }}</p>
+              </div>
+              <div class="mt-6 flex flex-wrap gap-2">
+                <span v-for="item in currentTexts.focus" :key="item" class="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-slate-200">
+                  {{ item }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid gap-0 divide-y divide-white/10 bg-slate-950/58">
+            <div v-for="note in currentTexts.notes" :key="note.title" class="p-5">
+              <p class="text-xs font-bold uppercase tracking-wide text-slate-500">{{ note.title }}</p>
+              <p class="mt-2 text-sm leading-6 text-slate-300">{{ note.text }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 </template>
-<style scoped>
-@keyframes float {
-    0% { transform: translateY(-50%) translateY(0px); }
-    50% { transform: translateY(-50%) translateY(-20px); }
-    100% { transform: translateY(-50%) translateY(0px); }
-}
-.animate-float {
-    animation: float 6s ease-in-out infinite;
-}
-</style>
+
 <script setup>
-import { useLang } from '@/composables/useLang'
 import { computed } from 'vue'
+import { useLang } from '@/composables/useLang'
 
 const { lang } = useLang()
 
 const texts = {
   en: {
-    hi: "Hi, I'm",
-    description: `I love bringing ideas to life by creating digital experiences. My process involves a blend of creativity and problem-solving to design and build engaging, user-friendly projects, from websites to games. I am always excited to learn new skills, take on challenges, and collaborate with others.`,
-    download: "Download resume"
+    kicker: 'Personal project archive',
+    headline: 'I collect the things I build,',
+    headlineAccent: 'learn and improve here.',
+    description: 'A personal portfolio shaped around web interfaces, production workflow tools and Unity prototypes. Each project shows the problem, the technical approach and what I learned.',
+    primaryCta: 'Explore projects',
+    secondaryCta: 'See experience',
+    cardEyebrow: 'What this site is about',
+    cardTitle: 'Projects, practice and the development process behind them.',
+    focus: ['Vue.js', 'C#', 'Unity', 'SQL'],
+    stats: [
+      { value: '7+', label: 'Projects' },
+      { value: 'Web', label: 'Interfaces' },
+      { value: 'Unity', label: 'Game prototypes' },
+    ],
+    notes: [
+      { title: 'Case notes', text: 'I make the product need and technical decisions visible, not only the final screen.' },
+      { title: 'Experience', text: 'Factory, inventory and production workflows give practical context to what I build.' },
+    ],
   },
   tr: {
-    hi: "Selam, ben",
-    description: `Dijital deneyimler aracılığıyla fikirleri hayata geçirmeye tutkulu, yaratıcı biriyim. Yaratıcılığımı problem çözme becerimle birleştirerek, hem işlevsel hem de görsel açıdan etkileyici projeler tasarlamayı ve geliştirmeyi seviyorum. Oyun geliştirmekten kullanıcı dostu arayüzler oluşturmaya kadar her türlü projede, sürekli öğrenmeye ve verimli iş birliklerine açık bir şekilde çalışıyorum.`,
-    download: "CV'yi indir"
+    kicker: 'Kişisel proje arşivi',
+    headline: 'Geliştirdiğim, denediğim',
+    headlineAccent: 've öğrendiğim işleri topluyorum.',
+    description: 'Web arayüzleri, üretim iş akışı araçları ve Unity prototipleri üzerine kurduğum kişisel portfolyo. Her projede problemi, teknik yaklaşımı ve öğrendiklerimi öne çıkarıyorum.',
+    primaryCta: 'Projeleri keşfet',
+    secondaryCta: 'Deneyimi gör',
+    cardEyebrow: 'Bu sitenin odağı',
+    cardTitle: 'Projeler, pratikler ve arkalarındaki geliştirme süreci.',
+    focus: ['Vue.js', 'C#', 'Unity', 'SQL'],
+    stats: [
+      { value: '7+', label: 'Proje' },
+      { value: 'Web', label: 'Arayüz' },
+      { value: 'Unity', label: 'Oyun prototipi' },
+    ],
+    notes: [
+      { title: 'Vaka notları', text: 'Sadece son ekranı değil, projenin ürün ihtiyacını ve teknik kararlarını da görünür kılıyorum.' },
+      { title: 'Deneyim', text: 'Fabrika, stok ve üretim süreçleri geliştirdiğim işlere pratik bağlam sağlıyor.' },
+    ],
   },
   ru: {
-    hi: "Привет, я",
-    description: `Я увлеченный создатель цифровых продуктов, для которого важно не просто воплощать идеи в жизнь, но и наполнять их смыслом. Мой подход строится на гармонии креативности и решения задач: будь то игра или веб-сайт, я стремлюсь к тому, чтобы результат был эстетичным, удобным и технически безупречным. Я верю в непрерывное развитие и всегда открыт к новым вызовам, возможностям учиться и плодотворному сотрудничеству.`,
-    download: "Скачать резюме"
-  }
-}
-
-const names = {
-  en: "Ibrahim",
-  tr: "İbrahim",
-  ru: "Ибрагим"
+    kicker: 'Личный архив проектов',
+    headline: 'Здесь я собираю то,',
+    headlineAccent: 'что создаю, изучаю и улучшаю.',
+    description: 'Персональное портфолио о веб-интерфейсах, инструментах для производственных процессов и Unity-прототипах. Каждый проект показывает задачу, технический подход и выводы.',
+    primaryCta: 'Смотреть проекты',
+    secondaryCta: 'Смотреть опыт',
+    cardEyebrow: 'Фокус сайта',
+    cardTitle: 'Проекты, практика и процесс разработки за ними.',
+    focus: ['Vue.js', 'C#', 'Unity', 'SQL'],
+    stats: [
+      { value: '7+', label: 'Проектов' },
+      { value: 'Web', label: 'Интерфейсы' },
+      { value: 'Unity', label: 'Игровые прототипы' },
+    ],
+    notes: [
+      { title: 'Заметки к кейсам', text: 'Я показываю не только финальный экран, но и продуктовую потребность и технические решения.' },
+      { title: 'Опыт', text: 'Производство, склад и операционные процессы дают практический контекст моим проектам.' },
+    ],
+  },
 }
 
 const currentTexts = computed(() => texts[lang.value] || texts.en)
-const displayName = computed(() => names[lang.value] || names.en)
+
+function scrollToSection(href) {
+  const section = document.querySelector(href)
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+}
 </script>

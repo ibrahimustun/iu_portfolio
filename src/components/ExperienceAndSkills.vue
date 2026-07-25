@@ -1,141 +1,91 @@
 <template>
-<section class="text-white mt-18" id="skills" ref="skillsRef">
-    <div class="absolute right-0 top-[110rem] h-full w-full justify-end">
-        <span class="flex opacity-20">
-            <span class="w-16 h-32 rounded-l-full flex bg-primary blur-2xl"></span>
-            <span class="w-16 h-32 rounded-r-full flex bg-[#f88fc2] blur-2xl mt-14"></span>
-        </span>
-    </div>
-    <div class="md:grid md:grid-cols-2 gap-8 items-center py-8 px-4 xl:gap-16 xl:px-16">
-        <div class="mt-4 md:mt-0 text-left flex flex-col z-10 h-full w-[80%]">
-            <h2 class="text-4xl font-bold text-white text-left mb-4">
-                {{ skillsTitle }}
-            </h2>
-            <div class="mt-8 p-4 rounded-xl bg-[#111a3e]/40 backdrop-blur-sm border border-white/5 hover:border-primary/30 transition-colors" v-for="skill in Skills" :key="skill.id">
-                <div class="flex items-end justify-between" data-aos="fade-right">
-                    <h4 class="font-semibold uppercase text-white">
-                        {{ skill.name }}
-                    </h4>
-                    <h3 class="text-2xl font-bold text-primary">{{ skill.width }}</h3>
-                </div>
-                <div class="mt-2 h-2 w-full bg-[#131d30] rounded-full overflow-hidden">
-                    <div class="h-full rounded-full bg-gradient-to-r from-primary to-secondary transition-all duration-1000 ease-out" :style="`width :${showSkills ? skill.width : '0%'}`"></div>
-                </div>
-            </div>
+  <section id="experience" class="section-block">
+    <div v-reveal>
+      <h2 class="section-heading">{{ currentTexts.experienceKicker }}</h2>
+
+      <div class="space-y-4">
+        <article v-for="item in currentTexts.experiences" :key="item.company" class="portfolio-row experience-row group">
+          <div class="sm:pt-1">
+            <p class="portfolio-date">{{ item.date }}</p>
+            <p class="mt-2 text-sm font-semibold text-slate-700">{{ item.company }}</p>
+          </div>
+          <div>
+            <h3 class="text-base font-semibold tracking-tight text-slate-950">
+              {{ item.role }}
+            </h3>
+            <p class="mt-2 text-sm leading-6 text-slate-600">{{ item.description }}</p>
+            <ul class="mt-4 flex flex-wrap gap-2">
+              <li v-for="skill in item.skills" :key="skill" class="tech-pill">{{ skill }}</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <div id="skills" class="mt-12 scroll-mt-24">
+        <h3 class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">{{ currentTexts.skillsKicker }}</h3>
+        <div class="mt-5 space-y-6">
+          <div v-for="group in currentTexts.skillGroups" :key="group.title">
+            <p class="text-sm font-semibold text-slate-950">{{ group.title }}</p>
+            <ul class="mt-3 flex flex-wrap gap-2">
+              <li v-for="skill in group.items" :key="skill" class="tech-pill">{{ skill }}</li>
+            </ul>
+          </div>
         </div>
-        <div data-aos="flip-left">
-            <h2 class="text-4xl font-bold text-white text-left mb-8 md:text-center md:mt-0 mt-8">
-                {{ experiencesTitle }}
-            </h2>
-            <div class="space-y-8 py-8" data-aos="fade-left">
-                <div v-for="element in Experiences" :key="element.id" class="flex items-center rounded-2xl p-6 bg-[#111a3e]/60 backdrop-blur-sm shadow-xl border border-white/5 hover:-translate-y-1 transition-transform duration-300">
-                    <div class="w-1/4">
-                        <img src="https://img.icons8.com/ios-filled/100/ffffff/lawyer.png" alt="lawyer">
-                    </div>
-                    <div class="w-3/4 pl-4">
-                        <h3 class="text-2xl font-semibold uppercase text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-                            {{ element.role }}
-                        </h3>
-                        <p class="text-white">{{ element.company }}</p>
-                        <p class="text-white">{{ element.date }}</p>
-                        <p class="text-white mt-2" v-if="element.description">{{ element.description }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-</section>
+  </section>
 </template>
+
 <script setup>
-import { computed, ref, onMounted } from 'vue'
+import { computed } from 'vue'
 import { useLang } from '@/composables/useLang'
 
 const { lang } = useLang()
 
 const texts = {
-    en: {
-        skillsTitle: 'My Skills',
-        experiencesTitle: 'My Experiences'
-    },
-    tr: {
-        skillsTitle: 'Yeteneklerim',
-        experiencesTitle: 'Deneyimlerim'
-    },
-    ru: {
-        skillsTitle: 'Мои навыки',
-        experiencesTitle: 'Мой опыт'
-    }
-};
-
-const skills = {
-    en: [
-        { id: 1, name: 'HTML & CSS', width: '85%' },
-        { id: 2, name: 'C#', width: '75%' },
-        { id: 3, name: 'JavaScript', width: '80%' },
-        { id: 4, name: 'Vue.js', width: '85%' },
-        { id: 5, name: 'Unity', width: '90%' },
-        { id: 6, name: 'Java', width: '60%' },
-        { id: 7, name: 'SQL', width: '80%' }
+  en: {
+    experienceKicker: 'Experience',
+    skillsKicker: 'Technologies',
+    experiences: [
+      { role: 'Software Development Specialist', company: 'NeonRun', date: 'June 2025 - Present', description: 'I develop web interfaces for production operations and quality management processes that stay clear for daily factory use.', skills: ['Vue.js', 'Java Spring Boot', 'SQL', 'Production processes', 'Quality management'] },
+      { role: 'Web Design Specialist', company: 'Seta Medya', date: 'December 2024 - January 2025', description: 'I designed and prepared web pages for launch with a focus on visual hierarchy, responsive structure and fast revisions.', skills: ['Responsive design', 'WordPress', 'HTML', 'CSS', 'Visual hierarchy'] },
+      { role: 'Software Developer', company: 'Itimat Asansor', date: 'Sep 2024 - Dec 2024', description: 'I built a warehouse management application that made inventory movements easier to record, monitor and audit.', skills: ['Java Spring Boot', 'MySQL', 'Vue.js', 'Inventory management'] },
     ],
-    tr: [
-        { id: 1, name: 'HTML & CSS', width: '85%' },
-        { id: 2, name: 'C#', width: '75%' },
-        { id: 3, name: 'JavaScript', width: '80%' },
-        { id: 4, name: 'Vue.js', width: '85%' },
-        { id: 5, name: 'Unity', width: '90%' },
-        { id: 6, name: 'Java', width: '60%' },
-        { id: 7, name: 'SQL', width: '80%' }
+    skillGroups: [
+      { title: 'Frontend', items: ['Vue.js', 'JavaScript', 'TypeScript', 'Tailwind CSS', 'Bootstrap', 'WordPress'] },
+      { title: 'Backend and data', items: ['Java Spring Boot', 'C#', 'SQL', 'MySQL', 'Docker'] },
+      { title: 'Game development', items: ['Unity', '2D mechanics', 'Game prototyping', 'Git'] },
     ],
-    ru: [
-        { id: 1, name: 'HTML и CSS', width: '85%' },
-        { id: 2, name: 'C#', width: '75%' },
-        { id: 3, name: 'JavaScript', width: '80%' },
-        { id: 4, name: 'Vue.js', width: '85%' },
-        { id: 5, name: 'Unity', width: '90%' },
-        { id: 6, name: 'Java', width: '60%' },
-        { id: 7, name: 'SQL', width: '80%' }
-    ]
-};
-
-const experiences = {
-    en: [
-        { id: 0, role: 'Full-Stack Developer', company: 'NeonRun', date: 'June 2025 - Present', description: 'I am actively involved in software platforms that digitalize production operations and automate quality processes.'},
-        { id: 1, role: 'Web Designer', company: 'Seta Medya', date: 'December 2024 - January 2025'},
-        { id: 2, role: 'Software Developer', company: 'İtimat Asansör', date: 'September 2024 - December 2024', description: 'I successfully developed and implemented a warehouse management application that digitalized the stock and inventory processes for İtimat Asansör factory.' }
+  },
+  tr: {
+    experienceKicker: 'Deneyim',
+    skillsKicker: 'Teknolojiler',
+    experiences: [
+      { role: 'Yazılım Geliştirme Uzmanı', company: 'NeonRun', date: 'Haziran 2025 - Devam', description: 'Üretim operasyonları ve kalite yönetimi süreçleri için günlük fabrika kullanımında anlaşılır kalan web arayüzleri geliştiriyorum.', skills: ['Vue.js', 'Java Spring Boot', 'SQL', 'Üretim süreçleri', 'Kalite yönetimi'] },
+      { role: 'Web Tasarım Uzmanı', company: 'Seta Medya', date: 'Aralık 2024 - Ocak 2025', description: 'Görsel hiyerarşi, responsive yapı ve hızlı revizyon odağıyla web sayfaları tasarlayıp yayına hazırladım.', skills: ['Responsive tasarım', 'WordPress', 'HTML', 'CSS', 'Görsel hiyerarşi'] },
+      { role: 'Yazılım Geliştirici', company: 'İtimat Asansör', date: 'Eylül 2024 - Aralık 2024', description: 'Stok hareketlerinin kaydedilmesini, izlenmesini ve kontrol edilmesini kolaylaştıran depo yönetim uygulaması geliştirdim.', skills: ['Java Spring Boot', 'MySQL', 'Vue.js', 'Stok yönetimi'] },
     ],
-    tr: [
-        { id: 0, role: 'Full-Stack Developer', company: 'NeonRun', date: 'Haziran 2025 - Devam Ediyor', description: 'Üretim operasyonlarını dijitalleştiren ve kalite süreçlerini otomatikleştiren yazılım platformlarında aktif olarak görev alıyorum.' },
-        { id: 1, role: 'Web Tasarımcısı', company: 'Seta Medya', date: 'Aralık 2024 - Ocak 2025'},
-        { id: 2, role: 'Yazılım Geliştirici', company: 'İtimat Asansör', date: 'Eylül 2024 - Aralık 2024', description: 'İtimat Asansör fabrikası için stok ve envanter süreçlerini dijitalleştiren, depo takip uygulamasını başarıyla geliştirdim ve uygulamaya aldım.' }
+    skillGroups: [
+      { title: 'Frontend', items: ['Vue.js', 'JavaScript', 'TypeScript', 'Tailwind CSS', 'Bootstrap', 'WordPress'] },
+      { title: 'Backend ve veri', items: ['Java Spring Boot', 'C#', 'SQL', 'MySQL', 'Docker'] },
+      { title: 'Oyun geliştirme', items: ['Unity', '2D mekanikler', 'Oyun prototipleme', 'Git'] },
     ],
-    ru: [
-        { id: 0, role: 'Full-Stack разработчик', company: 'NeonRun', date: 'Июнь 2025 - по настоящее время', description: 'Я активно участвую в программных платформах, которые цифровизируют производственные операции и автоматизируют процессы контроля качества.' },
-        { id: 1, role: 'Веб-дизайнер', company: 'Seta Medya', date: 'Декабрь 2024 - Январь 2025'},
-        { id: 2, role: 'Разработчик ПО', company: 'İtimat Asansör', date: 'Сентябрь 2024 - Декабрь 2024', description: 'Я успешно разработал и внедрил приложение для управления складом, которое цифровизировало процессы учёта запасов и инвентаризации на заводе İtimat Asansör.' }
-    ]
-};
+  },
+  ru: {
+    experienceKicker: 'Опыт',
+    skillsKicker: 'Технологии',
+    experiences: [
+      { role: 'Специалист по разработке ПО', company: 'NeonRun', date: 'Июнь 2025 - настоящее время', description: 'Разрабатываю веб-интерфейсы для производственных операций и процессов управления качеством, которые остаются понятными для ежедневного использования на производстве.', skills: ['Vue.js', 'Java Spring Boot', 'SQL', 'Производственные процессы', 'Управление качеством'] },
+      { role: 'Специалист по веб-дизайну', company: 'Seta Medya', date: 'Декабрь 2024 - январь 2025', description: 'Проектировал и готовил к публикации веб-страницы с фокусом на визуальную иерархию, адаптивную структуру и быстрые правки.', skills: ['Адаптивный дизайн', 'WordPress', 'HTML', 'CSS', 'Визуальная иерархия'] },
+      { role: 'Разработчик ПО', company: 'İtimat Asansör', date: 'Сентябрь 2024 - декабрь 2024', description: 'Разработал приложение для управления складом, которое упростило запись, отслеживание и контроль движения запасов.', skills: ['Java Spring Boot', 'MySQL', 'Vue.js', 'Управление запасами'] },
+    ],
+    skillGroups: [
+      { title: 'Фронтенд', items: ['Vue.js', 'JavaScript', 'TypeScript', 'Tailwind CSS', 'Bootstrap', 'WordPress'] },
+      { title: 'Бэкенд и данные', items: ['Java Spring Boot', 'C#', 'SQL', 'MySQL', 'Docker'] },
+      { title: 'Разработка игр', items: ['Unity', '2D-механики', 'Прототипирование игр', 'Git'] },
+    ],
+  },
+}
 
-const skillsTitle = computed(() => (texts[lang.value] || texts.en).skillsTitle);
-const experiencesTitle = computed(() => (texts[lang.value] || texts.en).experiencesTitle);
-
-const Skills = computed(() => skills[lang.value] || skills.en);
-const Experiences = computed(() => experiences[lang.value] || experiences.en);
-
-const showSkills = ref(false);
-const skillsRef = ref(null);
-
-onMounted(() => {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                showSkills.value = true;
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.2 });
-
-    if (skillsRef.value) {
-        observer.observe(skillsRef.value);
-    }
-});
+const currentTexts = computed(() => texts[lang.value] || texts.en)
 </script>

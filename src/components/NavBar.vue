@@ -1,161 +1,141 @@
 <template>
-    <header class="fixed top-0 left-0 right-0 flex justify-between items-center p-6 bg-[#111827] bg-opacity-50 backdrop-blur-lg z-50 border-b border-[#33353F] border-opacity-30">
-        <!-- Logo -->
-        <div class="text-white text-3xl font-bold">
-            <img src="@/assets/iu.png" alt="Logo" class="h-16 w-auto" />
-        </div>
-        <!-- Nav and Flag Container -->
-        <div class="flex items-center ml-auto space-x-6">
-            <!-- Desktop Nav -->
-            <nav class="hidden md:block">
-                <ul class="flex flex-row items-center space-x-8">
-                    <li v-for="item in Menu" :key="item.name">
-                        <a :href="item.href" 
-                           class="block text-white transition hover:text-primary ease-linear text-2xl md:text-lg"
-                           @click="scrollToSection(item.href)"
-                        >
-                            {{ item.name }}
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <!-- Language Selector -->
-            <div class="relative" id="lang-dropdown">
-            <button
-                            class="flex items-center px-2 py-1 rounded bg-[#111827] text-white focus:outline-none"
-                            @click.stop="showDropdown = !showDropdown"
-            type="button"
-            >
-            <img
-                            :src="flagIcons[selectedLanguage]"
-                            :alt="selectedLanguage"
-                class="w-7 h-7 mr-2 rounded-full object-cover object-center"
-            />
-            </button>
-    <!-- DÜZELTİLEN KISIM -->
-        <div 
-        v-if="showDropdown"
-        class="absolute z-40 left-1/2 -translate-x-1/2 mt-2 w-20 bg-[#111827] rounded-xl shadow-lg flex flex-col items-center"
-        style="min-width: 48px;"
+  <header class="fixed inset-x-0 top-2 z-50 px-3 sm:top-4">
+    <div class="mx-auto flex max-w-[45rem] items-center justify-center">
+      <nav
+        class="flex w-full items-center justify-between gap-0 overflow-x-auto rounded-full bg-white/88 p-2 shadow-xl shadow-teal-200/30 ring-1 ring-white/70 backdrop-blur-2xl sm:gap-3 sm:overflow-visible sm:px-8"
+        aria-label="Primary navigation"
+      >
+        <a
+          v-for="item in menuItems"
+          :key="item.href"
+          :href="item.href"
+          class="shrink-0 rounded-full px-2.5 py-3 text-xs font-medium text-slate-600 transition hover:bg-teal-50 hover:text-teal-800 sm:px-4 sm:text-sm"
+          :class="item.href === activeHref ? 'bg-teal-50 text-teal-900' : ''"
+          @click="scrollToSection(item.href)"
         >
-        <ul>
-            <li
-                v-for="option in languageOptions"
-                :key="option.code"
-                class="flex items-center justify-center px-1 py-2 cursor-pointer hover:bg-[#232a3d] rounded-xl"
-                @click="selectedLanguage = option.code; showDropdown = false; changeLanguage()"
-            >
-                <img :src="option.icon" :alt="option.label" class="w-7 h-7 rounded-full object-cover object-center" />
-            </li>
-        </ul>
-        </div>
-        </div>
-            <!-- Mobile Menu Button -->
-            <div class="md:hidden z-30 ml-2">
-                <button type="button" 
-                    class="block focus:outline-none"
-                    @click="isMenuOpen = !isMenuOpen"
-                >
-                    <span v-if="isMenuOpen" class="text-5xl">
-                        <img src="https://img.icons8.com/ios-filled/100/ffffff/delete-sign.png" alt="close" width="50" height="50">
-                    </span>
-                    <span v-else class="text-5xl">
-                        <img src="https://img.icons8.com/ios-filled/100/ffffff/menu--v6.png" alt="menu" width="50" height="50">
-                    </span>
-                </button>
-            </div>
-        </div>
-        <!-- Mobile Nav -->
-        <nav
-            :class="['fixed inset-0 z-20 flex flex-col items-center justify-center bg-[#111827] bg-opacity-95 backdrop-blur-xl md:relative md:bg-transparent md:hidden md:justify-between md:flex-row transition-all duration-300 ease-in-out',
-                isMenuOpen ? 'opacity-100 pointer-events-auto visible' : 'opacity-0 pointer-events-none invisible md:opacity-100 md:pointer-events-auto md:visible'
-            ]"
-        >
-            <ul class="flex flex-col items-center space-y-5 md:flex-row md:space-x-5 md:space-y-0">
-                <li v-for="item in Menu" :key="item.name">
-                    <a :href="item.href" 
-                        class="block text-white transition hover:text-primary ease-linear text-2xl md:text-lg"
-                        @click="scrollToSection(item.href)"
-                    >
-                        {{ item.name }}
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+          {{ item.name }}
+        </a>
+      </nav>
+    </div>
+
+    <div class="fixed right-3 top-2 z-[60] flex gap-1 rounded-full bg-white/88 p-1.5 shadow-xl shadow-teal-200/30 ring-1 ring-white/70 backdrop-blur-2xl sm:right-4 sm:top-4">
+      <button
+        v-for="option in languageOptions"
+        :key="option.code"
+        type="button"
+        class="rounded-full px-2.5 py-2 text-xs font-bold uppercase tracking-wide transition"
+        :class="lang === option.code ? 'bg-teal-600 text-white' : 'text-slate-500 hover:bg-teal-50 hover:text-teal-800'"
+        :aria-label="option.label"
+        @click="setLang(option.code)"
+      >
+        {{ option.code }}
+      </button>
+      <span class="mx-1 my-2 w-px bg-teal-100"></span>
+      <button
+        type="button"
+        class="flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold transition"
+        :class="theme === 'dark' ? 'bg-teal-500 text-slate-950' : 'text-slate-500 hover:bg-teal-50 hover:text-teal-800'"
+        :aria-label="theme === 'dark' ? 'Switch to day mode' : 'Switch to night mode'"
+        :title="theme === 'dark' ? 'Day mode' : 'Night mode'"
+        @click="toggleTheme"
+      >
+        {{ theme === 'dark' ? '☀' : '☾' }}
+      </button>
+    </div>
+  </header>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useLang } from '@/composables/useLang'
+import { useTheme } from '@/composables/useTheme'
 
-const { lang, setLang } = useLang();
+const { lang, setLang } = useLang()
+const { theme, toggleTheme } = useTheme()
+const activeHref = ref('#home')
 
-const MenuLabels = {
-    en: [
-        {name:'About Me',href:'#about'},
-        {name:'Skills',href:'#skills'},
-        {name:'Projects',href:'#projects'},
-        {name:'Contact',href:'#contact'},
-    ],
-    tr: [
-        {name:'Hakkımda',href:'#about'},
-        {name:'Yetenekler',href:'#skills'},
-        {name:'Projeler',href:'#projects'},
-        {name:'İletişim',href:'#contact'},
-    ],
-    ru: [
-        {name:'Обо мне',href:'#about'},
-        {name:'Навыки',href:'#skills'},
-        {name:'Проекты',href:'#projects'},
-        {name:'Контакты',href:'#contact'},
-    ],
-};
-
-const selectedLanguage = ref(lang.value);
-const Menu = ref(MenuLabels[selectedLanguage.value]);
-const isMenuOpen = ref(false);
-
-const changeLanguage = () => {
-    setLang(selectedLanguage.value); 
-    Menu.value = MenuLabels[selectedLanguage.value];
-};
-
-watch(selectedLanguage, () => {
-    Menu.value = MenuLabels[selectedLanguage.value];
-    setLang(selectedLanguage.value);
-});
-
-const scrollToSection = (href) => {
-    isMenuOpen.value=false;
-    const section=document.querySelector(href);
-    if(section){
-        section.scrollIntoView({behavior :'smooth'});
-    }
-}
-
-// Bayrak ikonlarını eşle
-const flagIcons = {
-    en: "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gb.svg",
-    tr: "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tr.svg",
-    ru: "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ru.svg"
-};
 const languageOptions = [
-    { code: "en", label: "English", icon: flagIcons.en },
-    { code: "tr", label: "Türkçe", icon: flagIcons.tr },
-    { code: "ru", label: "Русский", icon: flagIcons.ru }
-];
+  { code: 'en', label: 'English' },
+  { code: 'tr', label: 'Türkçe' },
+  { code: 'ru', label: 'Русский' },
+]
 
-const showDropdown = ref(false);
+const menuLabels = {
+  en: [
+    { name: 'Home', href: '#home' },
+    { name: 'About', href: '#about' },
+    { name: 'Experience', href: '#experience' },
+    { name: 'Tech Stack', href: '#skills' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Contact', href: '#contact' },
+  ],
+  tr: [
+    { name: 'Ana Sayfa', href: '#home' },
+    { name: 'Hakkımda', href: '#about' },
+    { name: 'Deneyim', href: '#experience' },
+    { name: 'Teknolojiler', href: '#skills' },
+    { name: 'Projeler', href: '#projects' },
+    { name: 'İletişim', href: '#contact' },
+  ],
+  ru: [
+    { name: 'Главная', href: '#home' },
+    { name: 'Обо мне', href: '#about' },
+    { name: 'Опыт', href: '#experience' },
+    { name: 'Стек', href: '#skills' },
+    { name: 'Проекты', href: '#projects' },
+    { name: 'Контакты', href: '#contact' },
+  ],
+}
 
-function handleClickOutside(event) {
-    const dropdown = document.getElementById('lang-dropdown');
-    if (dropdown && !dropdown.contains(event.target)) {
-        showDropdown.value = false;
+const menuItems = computed(() => menuLabels[lang.value] || menuLabels.en)
+const sectionHrefs = ['#home', '#about', '#experience', '#skills', '#projects', '#contact']
+
+function scrollToSection(href) {
+  const section = document.querySelector(href)
+  if (section) {
+    activeHref.value = href
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+}
+
+function updateActiveSection() {
+  const pageBottom = window.scrollY + window.innerHeight
+  const documentHeight = document.documentElement.scrollHeight
+
+  if (pageBottom >= documentHeight - 12) {
+    activeHref.value = '#contact'
+    return
+  }
+
+  const checkpoint = window.innerHeight * 0.34
+  let currentHref = '#home'
+
+  for (const href of sectionHrefs) {
+    const section = document.querySelector(href)
+    if (!section) continue
+
+    const rect = section.getBoundingClientRect()
+    if (rect.top <= checkpoint && rect.bottom > checkpoint) {
+      currentHref = href
+      continue
     }
-}
-if (typeof window !== "undefined") {
-    window.addEventListener('click', handleClickOutside);
-}
-</script>
 
+    if (rect.top <= checkpoint) {
+      currentHref = href
+    }
+  }
+
+  activeHref.value = currentHref
+}
+
+onMounted(() => {
+  updateActiveSection()
+  window.addEventListener('scroll', updateActiveSection, { passive: true })
+  window.addEventListener('resize', updateActiveSection)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', updateActiveSection)
+  window.removeEventListener('resize', updateActiveSection)
+})
+</script>

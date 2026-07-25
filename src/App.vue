@@ -1,44 +1,44 @@
 <template>
-  <div class="bg-[#111827] min-h-screen"> 
-     <Suspense>
+  <div class="min-h-screen text-slate-950">
+    <Suspense>
       <template #default>
-         <div>
-            <NavBar />
-            <HeroSection />
-            <AboutSection />
-            <ExperienceAndSkills />
-            <LatestProjSection />
-            <ContactSection />
-            <Footer />
-            <BackToTop />
-      </div>
-    </template>
-    <template #fallback>
-      <div class="flex justify-center items-center min-h-screen">
+        <div>
+          <NavBar />
+          <div class="mx-auto min-h-screen max-w-5xl px-6 pt-28 md:px-10">
+            <SideProfile />
+            <main id="content" class="mx-auto max-w-3xl">
+              <AboutSection />
+              <ExperienceAndSkills />
+              <LatestProjSection />
+              <Footer />
+            </main>
+          </div>
+        </div>
+      </template>
+      <template #fallback>
+        <div class="flex min-h-screen items-center justify-center">
           <loadingSpinner />
-      </div>
-    </template>
-  </Suspense>
+        </div>
+      </template>
+    </Suspense>
   </div>
 </template>
 
 <script setup>
- import { defineAsyncComponent } from 'vue';
-//Import Components Asynchronously
-const NavBar = defineAsyncComponent(()=>import('@/components/NavBar.vue'));
-const HeroSection = defineAsyncComponent(()=>import('@/components/HeroSection.vue'));
-const AboutSection = defineAsyncComponent(()=>import('@/components/AboutSection.vue'));
-const LatestProjSection = defineAsyncComponent(()=>import('@/components/LatestProjSection.vue'));
-const ExperienceAndSkills = defineAsyncComponent(()=>import('@/components/ExperienceAndSkills.vue'));
-const ContactSection = defineAsyncComponent(()=>import('@/components/ContactSection.vue'));
-const Footer = defineAsyncComponent(()=>import('@/components/Footer.vue'));
-const BackToTop = defineAsyncComponent(()=>import('@/components/BackToTop.vue'));
-import loadingSpinner from './components/loadingSpinner.vue';
-</script>
-<style>
+import { defineAsyncComponent } from 'vue'
+import loadingSpinner from './components/loadingSpinner.vue'
 
-*{
+const NavBar = defineAsyncComponent(() => import('@/components/NavBar.vue'))
+const SideProfile = defineAsyncComponent(() => import('@/components/SideProfile.vue'))
+const AboutSection = defineAsyncComponent(() => import('@/components/AboutSection.vue'))
+const LatestProjSection = defineAsyncComponent(() => import('@/components/LatestProjSection.vue'))
+const ExperienceAndSkills = defineAsyncComponent(() => import('@/components/ExperienceAndSkills.vue'))
+const Footer = defineAsyncComponent(() => import('@/components/Footer.vue'))
+</script>
+
+<style>
+* {
   scrollbar-width: thin;
-  scrollbar-color: #111827 #f1f1f1;
+  scrollbar-color: #14b8a6 #f0fdfa;
 }
 </style>
