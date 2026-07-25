@@ -1,8 +1,32 @@
 <template>
   <header class="fixed inset-x-0 top-2 z-50 px-3 sm:top-4">
-    <div class="mx-auto flex max-w-[45rem] items-center justify-center">
+    <div class="mx-auto flex max-w-[45rem] items-center justify-end md:justify-center">
+      <button
+        type="button"
+        class="flex h-11 w-11 items-center justify-center rounded-full bg-white/88 text-slate-700 shadow-xl shadow-teal-200/30 ring-1 ring-white/70 backdrop-blur-2xl transition hover:bg-teal-50 hover:text-teal-800 md:hidden"
+        :aria-expanded="isMenuOpen"
+        aria-controls="mobile-navigation"
+        :aria-label="isMenuOpen ? currentControls.closeMenu : currentControls.openMenu"
+        @click="isMenuOpen = !isMenuOpen"
+      >
+        <span class="relative h-4 w-5">
+          <span
+            class="absolute left-0 top-0 h-0.5 w-5 rounded-full bg-current transition"
+            :class="isMenuOpen ? 'translate-y-[7px] rotate-45' : ''"
+          ></span>
+          <span
+            class="absolute left-0 top-[7px] h-0.5 w-5 rounded-full bg-current transition"
+            :class="isMenuOpen ? 'opacity-0' : ''"
+          ></span>
+          <span
+            class="absolute left-0 top-[14px] h-0.5 w-5 rounded-full bg-current transition"
+            :class="isMenuOpen ? '-translate-y-[7px] -rotate-45' : ''"
+          ></span>
+        </span>
+      </button>
+
       <nav
-        class="flex w-full items-center justify-between gap-0 overflow-x-auto rounded-full bg-white/88 p-2 shadow-xl shadow-teal-200/30 ring-1 ring-white/70 backdrop-blur-2xl sm:gap-3 sm:overflow-visible sm:px-8"
+        class="hidden w-full items-center justify-between gap-0 rounded-full bg-white/88 p-2 shadow-xl shadow-teal-200/30 ring-1 ring-white/70 backdrop-blur-2xl md:flex md:gap-3 md:px-8"
         aria-label="Primary navigation"
       >
         <a
@@ -18,7 +42,7 @@
       </nav>
     </div>
 
-    <div class="fixed right-3 top-2 z-[60] flex gap-1 rounded-full bg-white/88 p-1.5 shadow-xl shadow-teal-200/30 ring-1 ring-white/70 backdrop-blur-2xl sm:right-4 sm:top-4">
+    <div class="fixed right-3 top-2 z-[60] hidden gap-1 rounded-full bg-white/88 p-1.5 shadow-xl shadow-teal-200/30 ring-1 ring-white/70 backdrop-blur-2xl sm:right-4 sm:top-4 md:flex">
       <button
         v-for="option in languageOptions"
         :key="option.code"
@@ -42,6 +66,53 @@
         {{ theme === 'dark' ? '☀' : '☾' }}
       </button>
     </div>
+
+    <div
+      id="mobile-navigation"
+      class="mx-auto mt-3 max-w-sm overflow-hidden rounded-2xl bg-white/94 shadow-2xl shadow-teal-200/40 ring-1 ring-white/70 backdrop-blur-2xl transition md:hidden"
+      :class="isMenuOpen ? 'max-h-[34rem] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'"
+    >
+      <nav class="grid gap-1 p-2" aria-label="Mobile navigation">
+        <a
+          v-for="item in menuItems"
+          :key="item.href"
+          :href="item.href"
+          class="rounded-xl px-4 py-3 text-sm font-semibold text-slate-600 transition hover:bg-teal-50 hover:text-teal-800"
+          :class="item.href === activeHref ? 'bg-teal-50 text-teal-900' : ''"
+          @click="scrollToSection(item.href)"
+        >
+          {{ item.name }}
+        </a>
+      </nav>
+
+      <div class="border-t border-teal-100/80 p-3">
+        <p class="px-1 text-xs font-semibold uppercase tracking-wide text-slate-400">{{ currentControls.language }}</p>
+        <div class="mt-2 grid grid-cols-3 gap-2">
+          <button
+            v-for="option in languageOptions"
+            :key="option.code"
+            type="button"
+            class="rounded-full px-3 py-2 text-xs font-bold uppercase tracking-wide transition"
+            :class="lang === option.code ? 'bg-teal-600 text-white' : 'bg-teal-50 text-teal-700 hover:bg-teal-100'"
+            :aria-label="option.label"
+            @click="setLang(option.code)"
+          >
+            {{ option.code }}
+          </button>
+        </div>
+
+        <button
+          type="button"
+          class="mt-3 flex w-full items-center justify-between rounded-xl bg-teal-50 px-4 py-3 text-sm font-semibold text-teal-800 transition hover:bg-teal-100"
+          @click="toggleTheme"
+        >
+          <span>{{ currentControls.theme }}</span>
+          <span class="flex h-8 w-8 items-center justify-center rounded-full bg-white text-base shadow-sm">
+            {{ theme === 'dark' ? '☀' : '☾' }}
+          </span>
+        </button>
+      </div>
+    </div>
   </header>
 </template>
 
@@ -53,6 +124,7 @@ import { useTheme } from '@/composables/useTheme'
 const { lang, setLang } = useLang()
 const { theme, toggleTheme } = useTheme()
 const activeHref = ref('#home')
+const isMenuOpen = ref(false)
 
 const languageOptions = [
   { code: 'en', label: 'English' },
@@ -87,13 +159,36 @@ const menuLabels = {
   ],
 }
 
+const controlLabels = {
+  en: {
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
+    language: 'Language',
+    theme: 'Theme',
+  },
+  tr: {
+    openMenu: 'Menüyü aç',
+    closeMenu: 'Menüyü kapat',
+    language: 'Dil',
+    theme: 'Tema',
+  },
+  ru: {
+    openMenu: 'Открыть меню',
+    closeMenu: 'Закрыть меню',
+    language: 'Язык',
+    theme: 'Тема',
+  },
+}
+
 const menuItems = computed(() => menuLabels[lang.value] || menuLabels.en)
+const currentControls = computed(() => controlLabels[lang.value] || controlLabels.en)
 const sectionHrefs = ['#home', '#about', '#experience', '#skills', '#projects', '#contact']
 
 function scrollToSection(href) {
   const section = document.querySelector(href)
   if (section) {
     activeHref.value = href
+    isMenuOpen.value = false
     section.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 }
