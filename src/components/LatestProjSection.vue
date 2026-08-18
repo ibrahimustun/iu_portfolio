@@ -5,28 +5,28 @@
       <div class="space-y-4">
         <article v-for="project in Projects" :key="project.id" class="portfolio-row group">
           <div class="sm:order-2">
-            <div class="relative overflow-hidden rounded-lg border border-slate-200 bg-white transition group-hover:border-slate-300">
+            <div class="relative overflow-hidden rounded-md">
             <img
               :src="project.images[project.currentImageIndex]"
               :alt="`${projectText(project).title} screenshot`"
-              class="aspect-video w-full object-cover object-top transition duration-500 hover:scale-105 sm:w-60"
+              class="aspect-video w-full rounded-md object-cover object-top transition duration-500 hover:scale-[1.03] sm:w-60"
               loading="lazy"
             />
               <div v-if="project.images.length > 1" class="absolute inset-x-2 bottom-2 flex items-center justify-between">
                 <button
                   type="button"
-                  class="project-image-button"
+                  class="ui-icon-button ui-icon-button-overlay"
                   :aria-label="currentTexts.previousImage"
                   @click="prevImage(project)"
                 >
                   ‹
                 </button>
-                <span class="rounded-full bg-white/90 px-2 py-1 text-[0.65rem] font-semibold text-slate-600 shadow-sm backdrop-blur">
+                <span class="rounded-full bg-slate-950/55 px-2 py-1 text-[0.65rem] font-semibold text-white backdrop-blur">
                   {{ project.currentImageIndex + 1 }}/{{ project.images.length }}
                 </span>
                 <button
                   type="button"
-                  class="project-image-button"
+                  class="ui-icon-button ui-icon-button-overlay"
                   :aria-label="currentTexts.nextImage"
                   @click="nextImage(project)"
                 >
@@ -39,8 +39,8 @@
                 v-for="(_, imageIndex) in project.images"
                 :key="imageIndex"
                 type="button"
-                class="h-1.5 rounded-full transition"
-                :class="imageIndex === project.currentImageIndex ? 'w-6 bg-teal-600' : 'w-2 bg-teal-100 hover:bg-teal-300'"
+                class="ui-carousel-dot"
+                :class="imageIndex === project.currentImageIndex ? 'is-active' : ''"
                 :aria-label="`${currentTexts.imageLabel} ${imageIndex + 1}`"
                 @click="project.currentImageIndex = imageIndex"
               />
@@ -62,9 +62,9 @@
             <ul class="mt-4 flex flex-wrap gap-2">
               <li v-for="technology in project.technologies" :key="technology" class="tech-pill">{{ technology }}</li>
             </ul>
-            <div class="mt-4 flex gap-4 text-sm font-semibold">
-              <a v-if="project.gitURL" :href="project.gitURL" target="_blank" rel="noreferrer" class="text-slate-600 transition hover:text-teal-700">GitHub</a>
-              <a v-if="project.demoURL" :href="project.demoURL" target="_blank" rel="noreferrer" class="text-slate-600 transition hover:text-teal-700">{{ currentTexts.liveDemo }}</a>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <a v-if="project.gitURL" :href="project.gitURL" target="_blank" rel="noreferrer" class="ui-button ui-button-secondary ui-button-compact">GitHub</a>
+              <a v-if="project.demoURL" :href="project.demoURL" target="_blank" rel="noreferrer" class="ui-button ui-button-secondary ui-button-compact">{{ currentTexts.liveDemo }}</a>
             </div>
           </div>
         </article>

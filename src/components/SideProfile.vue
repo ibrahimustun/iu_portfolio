@@ -28,7 +28,7 @@
       <a
         :href="cvPath"
         download="IbrahimUstun-SoftwareDeveloperResume.pdf"
-        class="download-cv-button mt-9 inline-flex min-h-12 items-center justify-center rounded-full bg-teal-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-teal-200/70 ring-1 ring-teal-500/20 transition hover:-translate-y-0.5 hover:bg-teal-700 hover:shadow-xl hover:shadow-teal-200/80"
+        class="ui-button ui-button-primary mt-9"
       >
         {{ currentTexts.downloadCv }}
       </a>

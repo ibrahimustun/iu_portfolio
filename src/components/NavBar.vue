@@ -3,7 +3,7 @@
     <div class="mx-auto flex max-w-[45rem] items-center justify-end md:justify-center">
       <button
         type="button"
-        class="flex h-11 w-11 items-center justify-center rounded-full bg-white/88 text-slate-700 shadow-xl shadow-teal-200/30 ring-1 ring-white/70 backdrop-blur-2xl transition hover:bg-teal-50 hover:text-teal-800 md:hidden"
+        class="ui-icon-button md:hidden"
         :aria-expanded="isMenuOpen"
         aria-controls="mobile-navigation"
         :aria-label="isMenuOpen ? currentControls.closeMenu : currentControls.openMenu"
@@ -33,8 +33,8 @@
           v-for="item in menuItems"
           :key="item.href"
           :href="item.href"
-          class="shrink-0 rounded-full px-2.5 py-3 text-xs font-medium text-slate-600 transition hover:bg-teal-50 hover:text-teal-800 sm:px-4 sm:text-sm"
-          :class="item.href === activeHref ? 'bg-teal-50 text-teal-900' : ''"
+          class="ui-nav-link"
+          :class="item.href === activeHref ? 'is-active' : ''"
           @click="scrollToSection(item.href)"
         >
           {{ item.name }}
@@ -47,8 +47,8 @@
         v-for="option in languageOptions"
         :key="option.code"
         type="button"
-        class="rounded-full px-2.5 py-2 text-xs font-bold uppercase tracking-wide transition"
-        :class="lang === option.code ? 'bg-teal-600 text-white' : 'text-slate-500 hover:bg-teal-50 hover:text-teal-800'"
+        class="ui-segment-button"
+        :class="lang === option.code ? 'is-active' : ''"
         :aria-label="option.label"
         @click="setLang(option.code)"
       >
@@ -57,8 +57,8 @@
       <span class="mx-1 my-2 w-px bg-teal-100"></span>
       <button
         type="button"
-        class="flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold transition"
-        :class="theme === 'dark' ? 'bg-teal-500 text-slate-950' : 'text-slate-500 hover:bg-teal-50 hover:text-teal-800'"
+        class="ui-icon-button ui-icon-button-sm"
+        :class="theme === 'dark' ? 'is-active' : ''"
         :aria-label="theme === 'dark' ? 'Switch to day mode' : 'Switch to night mode'"
         :title="theme === 'dark' ? 'Day mode' : 'Night mode'"
         @click="toggleTheme"
@@ -77,8 +77,8 @@
           v-for="item in menuItems"
           :key="item.href"
           :href="item.href"
-          class="rounded-xl px-4 py-3 text-sm font-semibold text-slate-600 transition hover:bg-teal-50 hover:text-teal-800"
-          :class="item.href === activeHref ? 'bg-teal-50 text-teal-900' : ''"
+          class="ui-nav-link ui-nav-link-mobile"
+          :class="item.href === activeHref ? 'is-active' : ''"
           @click="scrollToSection(item.href)"
         >
           {{ item.name }}
@@ -92,8 +92,8 @@
             v-for="option in languageOptions"
             :key="option.code"
             type="button"
-            class="rounded-full px-3 py-2 text-xs font-bold uppercase tracking-wide transition"
-            :class="lang === option.code ? 'bg-teal-600 text-white' : 'bg-teal-50 text-teal-700 hover:bg-teal-100'"
+            class="ui-segment-button"
+            :class="lang === option.code ? 'is-active' : ''"
             :aria-label="option.label"
             @click="setLang(option.code)"
           >
@@ -103,7 +103,7 @@
 
         <button
           type="button"
-          class="mt-3 flex w-full items-center justify-between rounded-xl bg-teal-50 px-4 py-3 text-sm font-semibold text-teal-800 transition hover:bg-teal-100"
+          class="ui-button ui-button-secondary mt-3 w-full justify-between"
           @click="toggleTheme"
         >
           <span>{{ currentControls.theme }}</span>

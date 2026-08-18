@@ -16,14 +16,14 @@
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
           <a
             href="#projects"
-            class="inline-flex min-h-12 items-center justify-center rounded-full bg-cyan-300 px-6 py-3 text-sm font-bold text-slate-950 transition hover:bg-emerald-300"
+            class="ui-button ui-button-primary"
             @click="scrollToSection('#projects')"
           >
             {{ currentTexts.primaryCta }}
           </a>
           <a
             href="#skills"
-            class="inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 bg-white/[0.04] px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10"
+            class="ui-button ui-button-secondary"
             @click="scrollToSection('#skills')"
           >
             {{ currentTexts.secondaryCta }}

@@ -1,8 +1,10 @@
 <template>
-  <div class="min-h-screen text-slate-950">
+  <div class="relative isolate min-h-screen text-slate-950">
+    <div class="pointer-glow" aria-hidden="true"></div>
+    <SideParticleField />
     <Suspense>
       <template #default>
-        <div>
+        <div class="relative z-10">
           <NavBar />
           <div class="mx-auto min-h-screen max-w-5xl px-6 pt-28 md:px-10">
             <SideProfile />
@@ -30,6 +32,7 @@ import loadingSpinner from './components/loadingSpinner.vue'
 
 const NavBar = defineAsyncComponent(() => import('@/components/NavBar.vue'))
 const SideProfile = defineAsyncComponent(() => import('@/components/SideProfile.vue'))
+const SideParticleField = defineAsyncComponent(() => import('@/components/SideParticleField.vue'))
 const AboutSection = defineAsyncComponent(() => import('@/components/AboutSection.vue'))
 const LatestProjSection = defineAsyncComponent(() => import('@/components/LatestProjSection.vue'))
 const ExperienceAndSkills = defineAsyncComponent(() => import('@/components/ExperienceAndSkills.vue'))

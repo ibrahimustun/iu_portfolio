@@ -27,7 +27,7 @@ const socialLinks = [
           :href="link.href"
           target="_blank"
           rel="noreferrer"
-          class="shrink-0 rounded-full bg-white px-4 py-2.5 text-sm font-medium text-slate-700 shadow-sm ring-1 ring-teal-100/80 transition hover:-translate-y-0.5 hover:text-teal-800 hover:shadow-md hover:shadow-teal-100/80 sm:px-5 sm:py-3"
+          class="ui-button ui-button-primary shrink-0"
         >
           {{ link.label }}
         </a>
