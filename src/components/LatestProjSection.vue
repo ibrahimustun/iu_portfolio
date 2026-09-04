@@ -5,11 +5,11 @@
       <div class="space-y-4">
         <article v-for="project in Projects" :key="project.id" class="portfolio-row group">
           <div class="sm:order-2">
-            <div class="relative overflow-hidden rounded-md">
+            <div class="relative overflow-hidden rounded-md bg-slate-100">
             <img
               :src="project.images[project.currentImageIndex]"
               :alt="`${projectText(project).title} screenshot`"
-              class="aspect-video w-full rounded-md object-cover object-top transition duration-500 hover:scale-[1.03] sm:w-60"
+              class="aspect-video w-full rounded-md object-contain transition duration-500 hover:scale-[1.03] sm:w-60"
               loading="lazy"
             />
               <div v-if="project.images.length > 1" class="absolute inset-x-2 bottom-2 flex items-center justify-between">
@@ -63,7 +63,7 @@
               <li v-for="technology in project.technologies" :key="technology" class="tech-pill">{{ technology }}</li>
             </ul>
             <div class="mt-4 flex flex-wrap gap-2">
-              <a v-if="project.gitURL" :href="project.gitURL" target="_blank" rel="noreferrer" class="ui-button ui-button-secondary ui-button-compact">GitHub</a>
+
               <a v-if="project.demoURL" :href="project.demoURL" target="_blank" rel="noreferrer" class="ui-button ui-button-secondary ui-button-compact">{{ currentTexts.liveDemo }}</a>
             </div>
           </div>
@@ -96,13 +96,14 @@ const texts = {
       { value: 'web-app', label: 'Web applications' },
       { value: 'frontend', label: 'Frontend' },
       { value: 'game', label: 'Game development' },
+      { value: 'mobile', label: 'Mobile app' },
     ],
     projects: {
       1: {
-        title: 'Uplify',
-        description: 'A personal development application built for tracking goals, habits and progress.',
-        problem: 'Users needed a simple flow for staying consistent without relying on complex productivity tools.',
-        result: 'A clean Vue interface with goal tracking, visual progress and a calmer daily check-in flow.',
+        title: 'Selfstride',
+        description: 'A mobile-first goal and routine tracking app built with Ionic Vue and Capacitor.',
+        problem: 'Users needed a focused mobile flow for turning habits into measurable goals, daily completions and visible character progress.',
+        result: 'An Ionic Vue app with e-mail/password and native Android Google sign-in, device-local data, XP, streaks and routine progress tracking.',
       },
       2: {
         title: 'Ibu',
@@ -158,13 +159,14 @@ const texts = {
       { value: 'web-app', label: 'Web uygulamaları' },
       { value: 'frontend', label: 'Frontend' },
       { value: 'game', label: 'Oyun geliştirme' },
+      { value: 'mobile', label: 'Mobil uygulama' },
     ],
     projects: {
       1: {
-        title: 'Uplify',
-        description: 'Hedef, alışkanlık ve ilerleme takibi için geliştirilmiş kişisel gelişim uygulaması.',
-        problem: 'Kullanıcıların karmaşık üretkenlik araçlarına ihtiyaç duymadan düzenli kalabileceği sade bir akış gerekiyordu.',
-        result: 'Hedef takibi, görsel ilerleme ve daha sakin günlük kontrol deneyimi sunan Vue tabanlı bir arayüz.',
+        title: 'Selfstride',
+        description: 'Kişisel hedef ve rutin takibi için Ionic Vue ve Capacitor ile geliştirilmiş mobil öncelikli uygulama.',
+        problem: 'Kullanıcıların alışkanlıklarını ölçülebilir hedeflere, günlük tamamlanmalara ve görünür karakter ilerlemesine dönüştüren odaklı bir mobil akışa ihtiyacı vardı.',
+        result: 'E-posta/şifre ve Android Google girişi, cihaz içi veri saklama, XP, seri ve rutin ilerleme takibi sunan Ionic Vue uygulaması.',
       },
       2: {
         title: 'Ibu',
@@ -220,13 +222,14 @@ const texts = {
       { value: 'web-app', label: 'Веб-приложения' },
       { value: 'frontend', label: 'Фронтенд' },
       { value: 'game', label: 'Разработка игр' },
+      { value: 'mobile', label: 'Мобильное приложение' },
     ],
     projects: {
       1: {
-        title: 'Uplify',
-        description: 'Приложение для личного развития, созданное для отслеживания целей, привычек и прогресса.',
-        problem: 'Пользователям был нужен простой сценарий, чтобы оставаться регулярными без сложных инструментов продуктивности.',
-        result: 'Интерфейс на Vue с отслеживанием целей, визуальным прогрессом и более спокойной ежедневной проверкой.',
+        title: 'Selfstride',
+        description: 'Мобильное приложение для отслеживания целей и рутин, созданное на Ionic Vue и Capacitor.',
+        problem: 'Пользователям был нужен сфокусированный мобильный сценарий, который превращает привычки в измеримые цели, ежедневные выполнения и видимый прогресс персонажа.',
+        result: 'Приложение на Ionic Vue с e-mail/password и нативным входом Google для Android, локальными данными на устройстве, XP, сериями и отслеживанием рутин.',
       },
       2: {
         title: 'Ibu',
@@ -271,17 +274,12 @@ const texts = {
 const Projects = ref([
   {
     id: 1,
-    category: 'frontend',
+    category: 'mobile',
     featured: true,
-    images: [
-      new URL('@/assets/upfily.png', import.meta.url).href,
-      new URL('@/assets/upfily_1.png', import.meta.url).href,
-      new URL('@/assets/upfily_2.png', import.meta.url).href,
-      new URL('@/assets/upfily_3.png', import.meta.url).href,
-    ],
+    images: [new URL('@/assets/selfstride-logo.png', import.meta.url).href, new URL('@/assets/selfstride_1.jpeg', import.meta.url).href, new URL('@/assets/selfstride_2.jpeg', import.meta.url).href, new URL('@/assets/selfstride_3.jpeg', import.meta.url).href, new URL('@/assets/selfstride_4.jpeg', import.meta.url).href],
     currentImageIndex: 0,
-    gitURL: 'https://github.com/ibrahimustun/Upfily',
-    technologies: ['Vue.js', 'TypeScript', 'Bootstrap'],
+    gitURL: 'https://github.com/ibrahimustun/selfstride',
+    technologies: ['Ionic Vue', 'Vue 3', 'TypeScript', 'Capacitor', 'Vite'],
   },
   {
     id: 3,

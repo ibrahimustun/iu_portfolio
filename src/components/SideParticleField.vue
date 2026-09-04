@@ -21,8 +21,8 @@ function randomBetween(min, max) {
 }
 
 function createParticles(width, height) {
-  const areaBasedCount = Math.round((width * height) / 21000)
-  const count = Math.min(Math.max(areaBasedCount, 46), 96)
+  const areaBasedCount = Math.round((width * height) / 48000)
+  const count = Math.min(Math.max(areaBasedCount, 22), 46)
 
   return Array.from({ length: count }, () => ({
     x: randomBetween(18, Math.max(36, width - 18)),
@@ -82,7 +82,7 @@ function drawField(delta) {
   if (!field) return
 
   const { context, width, height, particles } = field
-  const maxDistance = Math.min(146, Math.max(112, width * 0.1))
+  const maxDistance = Math.min(112, Math.max(82, width * 0.07))
 
   context.clearRect(0, 0, width, height)
   context.lineCap = 'round'
@@ -96,7 +96,7 @@ function drawField(delta) {
       const distance = Math.hypot(first.x - second.x, first.y - second.y)
 
       if (distance < maxDistance) {
-        const alpha = (1 - distance / maxDistance) * 0.22
+        const alpha = (1 - distance / maxDistance) * 0.14
         context.beginPath()
         context.strokeStyle = isDarkTheme ? `rgba(45, 212, 191, ${alpha})` : `rgba(15, 23, 42, ${alpha * 1.45})`
         context.lineWidth = 0.62
